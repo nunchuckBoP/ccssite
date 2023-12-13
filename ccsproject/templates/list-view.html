@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+    {%if view.get_classname == 'JobListView' %}
+        {% if job_list %}
+            <table class='table'>
+                <tr>
+                    <th>Job</th>
+                    <th>Title</th>
+                    <th>Created By</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+                {% for job in job_list %}
+                    <tr>
+                        <td>{{ job.number_string }}</td>
+                        <td>{{ job.title }}</td>
+                        <td>{{ job.created_by }}</td>
+                        <td>{{ job.created }}</td>
+                        <td>
+                            <a href="{% url 'job-update' pk=job.id %}?next={% url 'job-list' %}">update</a>
+                            <a href="{% url 'job-delete' pk=job.id %}?next={% url 'job-list' %}">delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No jobs yet.</p>
+        {% endif %}
+
+        <a href={% url 'job-create' %}?next={%url 'job-list' %}>Create a new job</a>
+    {% elif view.get_classname == 'TimesheetListView' %}
+        {% if timesheet_list %}
+            <table class='table'>
+                <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+
+                {% for timesheet in timesheet_list %}
+                    <tr>
+                        <td>{{ timesheet.start_date }}</td>
+                        <td>{{ timesheet.end_date }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No timesheets for user yet.</p>
+        {% endif %}
+        <a href={% url 'sheet-create' %}?next={% url 'sheet-list' %}>Create a new timesheet</a>
+    {% else %}
+        <p>The big nothing.</p>
+    {% endif %}
+
+{% endblock %}

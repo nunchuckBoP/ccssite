@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+    {% if view.get_classname == 'JobCreateView' %}
+        <h1>Job Create</h1>
+    {% elif view.get_classname == 'JobUpdateView' %}
+        <h1>Job Update</h1>
+    {% elif view.get_classname == 'TimesheetCreateView' %}
+        <h1>Timesheet Create</h1>
+    {% elif view.get_classname == 'TimesheetUpdateView' %}
+        <h1>Timesheet Update</h1>
+    {% else %}
+        <h1>Form View</h1>
+    {% endif %}
+
+    {% crispy form %}
+{% endblock %}
