@@ -29,4 +29,11 @@ class TimesheetCreateView(LoginRequiredMixin, ClassNameMixin, CreateView):
 
 class TimesheetUpdateView(LoginRequiredMixin, ClassNameMixin, UpdateView):
     model = Timesheet
-    template_name = 'update_view.html'
+    template_name = 'form-view.html'
+    form_class = TimesheetForm
+    success_url = reverse_lazy('sheet-list')
+    
+class TimesheetDeleteView(LoginRequiredMixin, ClassNameMixin, DeleteView):
+    model = Timesheet
+    template_name = 'confirm.html'
+    success_url = reverse_lazy('sheet-list')

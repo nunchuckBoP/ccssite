@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from timetrack.views import TimesheetListView, TimesheetCreateView, TimesheetUpdateView
+from timetrack.views import TimesheetListView, TimesheetCreateView, TimesheetUpdateView, TimesheetDeleteView
 
 urlpatterns = [
     path('sheet/list/', TimesheetListView.as_view(), name='sheet-list'),
     path('sheet/create/', TimesheetCreateView.as_view(), name='sheet-create'),
-    path('sheet/update/', TimesheetUpdateView.as_view(), name='sheet-update')
+    path('sheet/update/<pk>', TimesheetUpdateView.as_view(), name='sheet-update'),
+    path('sheet/delete/<pk>', TimesheetDeleteView.as_view(), name='sheet-delete')
 ]

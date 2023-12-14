@@ -8,7 +8,7 @@
                     <th>Title</th>
                     <th>Created By</th>
                     <th>Created</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
                 {% for job in job_list %}
                     <tr>
@@ -17,8 +17,12 @@
                         <td>{{ job.created_by }}</td>
                         <td>{{ job.created }}</td>
                         <td>
-                            <a href="{% url 'job-update' pk=job.id %}?next={% url 'job-list' %}">update</a>
-                            <a href="{% url 'job-delete' pk=job.id %}?next={% url 'job-list' %}">delete</a>
+                            <a href="{% url 'job-update' pk=job.id %}?next={% url 'job-list' %}">
+                                <i class="fs-5 bi bi-pencil-square"></i>
+                            </a>
+                            <a href="{% url 'job-delete' pk=job.id %}?next={% url 'job-list' %}">
+                                <i class="p-2 fs-5 bi bi-trash-fill"></i>
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -28,18 +32,31 @@
         {% endif %}
 
         <a href={% url 'job-create' %}?next={%url 'job-list' %}>Create a new job</a>
+    
+    <!-- Timesheet List View -->
     {% elif view.get_classname == 'TimesheetListView' %}
         {% if timesheet_list %}
             <table class='table'>
                 <tr>
                     <th>Start Date</th>
                     <th>End Date</th>
+                    <th></th>
                 </tr>
 
                 {% for timesheet in timesheet_list %}
                     <tr>
                         <td>{{ timesheet.start_date }}</td>
                         <td>{{ timesheet.end_date }}</td>
+                        {% if not timesheet.has_children %}
+                        <td>
+                            <a href="{% url 'sheet-update' pk=timesheet.id %}?next={% url 'sheet-list' %}">
+                                <i class="fs-5 bi bi-pencil-square"></i>
+                            </a>
+                            <a href="{% url 'sheet-delete' pk=timesheet.id %}?next={% url 'sheet-list' %}">
+                                <i class="p-2 fs-5 bi bi-trash-fill"></i>
+                            </a>
+                        </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </table>

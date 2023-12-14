@@ -1,6 +1,6 @@
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.layout import Submit, Layout, Field, HTML
 from jobs.models import Job
 from crispy_bootstrap5.bootstrap5 import FloatingField
 
@@ -16,7 +16,8 @@ class JobForm(forms.ModelForm):
         self.helper.layout = Layout(
             FloatingField('number_string'),
             FloatingField('title'),
-            Submit('Submit', 'Submit')
+            Submit('Submit', 'Submit'),
+            HTML('<a class="btn btn-primary" href="/job/list">Cancel</a>')
         )
 
     class Meta:
