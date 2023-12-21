@@ -49,7 +49,7 @@
                         <td>{{ timesheet.end_date }}</td>
                         {% if not timesheet.has_children %}
                         <td>
-                            <a href="#">
+                            <a href="{% url 'entry-list' timesheet.id %}">
                                 <i class="p-2 fs-5 bi bi-binoculars-fill"></i>
                             </a>
                             <a href="{% url 'sheet-update' pk=timesheet.id %}?next={% url 'sheet-list' %}">
@@ -61,7 +61,7 @@
                         </td>
                         {% else %}
                         <td>
-                            <a href="#">
+                            <a href="{% url 'entry-list' timesheet.id %}">
                                 <i class="p-2 fs-5 bi bi-binoculars-fill"></i>
                             </a>
                         </td>
